@@ -35,8 +35,8 @@ PACKAGES=""
     luci-lua-runtime zoneinfo-asia zoneinfo-core luci-proto-mbim \
     libc coreutils-stat libopenssl-legacy \
     sms-tool luci-app-temp-status cpusage ttyd dmesg kmod-tun luci-lib-ipkg \
-    ipset ipt2socks iptables iptables-legacy iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat \
-    coreutils coreutils-base64 coreutils-nohup dns2socks ip-full libuci-lua microsocks resolveip tcping"
+    ipset iptables iptables-legacy iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat \
+    coreutils coreutils-base64 coreutils-nohup ip-full libuci-lua microsocks resolveip"
     
     # Openclah
     PACKAGES="$PACKAGES coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base luci-app-openclash"
@@ -62,7 +62,7 @@ PACKAGES=""
     # misc
     PACKAGES="$PACKAGES luci-app-ramfree luci-app-temp-status  wget"
     
-    PACKAGES="$PACKAGES kmod-i2c-bcm2835 i2c-tools kmod-i2c-core kmod-i2c-gpio"
+    PACKAGES="$PACKAGES i2c-tools kmod-i2c-core kmod-i2c-gpio"
     
     # No
     PACKAGES="$PACKAGES -procd-ujail -libgd -dnsmasq -automount -libustream-openssl -default-settings-chn -luci-i18n-base-zh-cn -kmod-usb-net-rtl8152-vendor -hostapd -hostapd-common -hostapd-utils"
