@@ -1,81 +1,152 @@
 ---
 proxy-groups:
-- name: SERVER-FALLBACK
+- name: FALLBACK
   type: fallback
   disable-udp: false
   use:
-  - PP-Umum
+    - PP-Cf
+    - PP-Lifetime
+    - PP-Vip
   url: http://www.gstatic.com/generate_204
-  interval: 180
-- name: SERVER-LOADBALANCE
+  interval: 150
+- name: LOADBALANCE(ch)
   type: load-balance
   strategy: consistent-hashing
   disable-udp: false
   use:
-  - PP-Umum
+    - PP-Cf
+    - PP-Lifetime
   url: http://www.gstatic.com/generate_204
-  interval: 180
+  interval: 150
+- name: LOADBALANCE(rr)
+  type: load-balance
+  strategy: round-robin
+  disable-udp: false
+  use:
+    - PP-Cf
+    - PP-Lifetime
+  url: http://www.gstatic.com/generate_204
+  interval: 300
 - name: BEST-PING
   type: url-test
   url: http://www.gstatic.com/generate_204
-  interval: 180
+  interval: 150
   tolerance: 50
   use:
-  - PP-Umum
-- name: SERVER-UMUM
+    - PP-Cf
+    - PP-Lifetime
+    - PP-Vip
+  #
+- name: Traffic-Umum
   type: select
   disable-udp: false
   use:
-  - PP-Umum
+    - PP-Cf
+    - PP-Lifetime
+    - PP-Vip
   proxies:
-  - SERVER-FALLBACK
-  - SERVER-LOADBALANCE
-- name: SERVER-GAME
+    - FALLBACK
+    - LOADBALANCE(ch)
+    - LOADBALANCE(rr)
+    - BEST-PING
+- name: Traffic-Sosmed
   type: select
   disable-udp: false
   use:
-  - PP-Umum
+    - PP-Cf
+    - PP-Lifetime
+    - PP-Vip
   proxies:
-  - SERVER-LOADBALANCE
-- name: SERVER-SOSMED
+    - FALLBACK
+    - LOADBALANCE(ch)
+    - LOADBALANCE(rr)
+    - BEST-PING
+- name: Traffic-Gaming
   type: select
   disable-udp: false
   use:
-  - PP-Umum
+    - PP-Cf
+    - PP-Lifetime
+    - PP-Vip
   proxies:
-  - SERVER-FALLBACK
-  - SERVER-LOADBALANCE
-- name: SERVER-SPEEDTEST
+  - LOADBALANCE(rr)
+- name: Traffic-Speedtest
   type: select
   disable-udp: false
   use:
-  - PP-Umum
+    - PP-Cf
+    - PP-Lifetime
+    - PP-Vip
   proxies:
-  - SERVER-LOADBALANCE
+    - LOADBALANCE(rr)
+#
+- name: Traffic-Udp
+  type: select
+  disable-udp: false
+  use:
+    - PP-Cf
+    - PP-Lifetime
+    - PP-Vip
 #
 proxy-providers:
-  PP-Umum:
+  PP-Cf:
     type: file
     path: "./proxy_provider/pp-umum.yaml"
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
-      interval: 180
+      interval: 150
+  PP-Lifetime:
+    type: file
+    path: "./proxy_provider/pp-lifetime.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 150
+  PP-Vip:
+    type: file
+    path: "./proxy_provider/pp-vip.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 150
+#  PP-Cloud:
+#    type: http
+#    url: "https://support.zoom.us.xray.aday.my.id/api/v1/sub"
+#    interval: 300
+#    path: "./proxy_provider/cloud.yml"
+#    health-check:
+#      enable: true
+#      url: http://www.gstatic.com/generate_204
+#      interval: 150
 #
 #rule-providers:
-#  RP-Umum:
-#    type: file
+#  RP-INDO:
+#    type: http
+#    path: "./rule_provider/rp-indo.yaml"
+#    url: #https://raw.githubusercontent.com/rtaserver/Clash-Rule-IP-Indo/main/rule-indo.yaml
+#    interval: 600
+#    proxy: Traffic-Umum
 #    behavior: classical
-#    path: "./rule_provider/rp-umun.yaml"
+#    format: yaml
+  #RP-UMUM:
+    #type: file
+    #behavior: classical
+    #path: "./rule_provider/rp-umum.yaml"
 #
 rules:
-- AND,((NETWORK,udp),(OR,((DST-PORT,443),(GEOSITE,youtube)))),REJECT
-- GEOSITE,rule-gaming,SERVER-GAME
-- GEOSITE,rule-sosmed,SERVER-SOSMED
-- GEOSITE,rule-streaming,SERVER-SOSMED
-- GEOIP,facebook,SERVER-SOSMED
-- GEOIP,netflix,SERVER-SOSMED
-- GEOIP,telegram,SERVER-SOSMED
-- GEOIP,twitter,SERVER-SOSMED
-- GEOSITE,rule-speedtest,SERVER-SPEEDTEST
-- MATCH,GLOBAL
+- AND,((NETWORK,UDP),(OR,((DST-PORT,443),(GEOSITE,youtube)))),REJECT
+#
+- GEOSITE,rule-gaming,Traffic-Gaming
+#
+- GEOSITE,rule-sosmed,Traffic-Sosmed
+- GEOSITE,rule-streaming,Traffic-Sosmed
+- GEOIP,facebook,Traffic-Sosmed
+- GEOIP,netflix,Traffic-Sosmed
+- GEOIP,telegram,Traffic-Sosmed
+- GEOIP,twitter,Traffic-Sosmed
+#
+- GEOSITE,rule-speedtest,Traffic-Speedtest
+#
+- AND,((NOT,((DST-PORT,443/80))),(OR,((NETWORK,UDP)))),Traffic-Udp
+- MATCH,Traffic-Umum
