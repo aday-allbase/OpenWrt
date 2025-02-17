@@ -38,7 +38,7 @@ PACKAGES=" libc php8 php8-fastcgi php8-fpm php8-mod-session php8-mod-ctype php8-
     EXCLUDED=" -procd-ujail -dnsmasq"
 
 # Misc
-    PACKAGES=" zram-swap adb parted losetup resize2fs luci luci-ssl block-mount htop bash curl wget wget-ssl tar unzip unrar gzip jq luci-app-ttyd nano httping screen openssh-sftp-server"
+    PACKAGES=" zram-swap adb parted losetup resize2fs luci luci-ssl block-mount htop bash curl wget wget-ssl tar unzip unrar gzip jq nano httping screen openssh-sftp-server"
 
 # Custom Files
 FILES="files"
