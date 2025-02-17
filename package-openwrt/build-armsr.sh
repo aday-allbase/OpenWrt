@@ -26,7 +26,7 @@ PACKAGES=""
     kmod-usb-net-asix kmod-usb-net-asix-ax88179 kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 \
     ca-bundle coreutils-sleep fontconfig coreutils-whoami file lolcat \
     zsh kmod-mii kmod-usb-wdm kmod-usb-serial-wwan kmod-usb-ehci kmod-phy-broadcom kmod-phylib-broadcom kmod-tg3 iptables-nft coreutils-stty \
-    iw-full \
+    kmod-usb-storage kmod-usb-storage-uas ntfs-3g iw-full \
     libqrtr-glib luci-proto-qmi \
     perl perlbase-base perlbase-bytes perlbase-class perlbase-config perlbase-cwd perlbase-dynaloader perlbase-errno perlbase-essential perlbase-fcntl perlbase-file \
     perlbase-filehandle perlbase-i18n perlbase-integer perlbase-io perlbase-list perlbase-locale perlbase-params perlbase-posix \
