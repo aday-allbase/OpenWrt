@@ -9,8 +9,8 @@ PROFILE="generic"
 PACKAGES=""
 
 # Selecting default packages
-    PACKAGES+="$PACKAGES -dnsmasq dnsmasq-full cgi-io libiwinfo libiwinfo-data libiwinfo-lua liblua \
-    zram-swap adb parted losetup resize2fs luci luci-ssl block-mount htop bash curl wget-ssl \
+    PACKAGES="$PACKAGES -dnsmasq dnsmasq-full cgi-io libiwinfo libiwinfo-data libiwinfo-lua liblua \
+    zram-swap adb parted losetup resize2fs luci luci-ssl block-mount htop bash curl wget wget-ssl \
     tar unzip unrar gzip jq luci-app-ttyd nano httping screen openssh-sftp-server \
     liblucihttp liblucihttp-lua libubus-lua lua luci-app-firewall luci-app-opkg \
     luci-base luci-lib-base luci-lib-ip luci-lib-jsonc luci-lib-nixio luci-mod-admin-full \
@@ -35,20 +35,11 @@ PACKAGES=""
     luci-lua-runtime zoneinfo-asia zoneinfo-core luci-proto-mbim \
     libc coreutils-stat libopenssl-legacy \
     sms-tool luci-app-temp-status cpusage ttyd dmesg kmod-tun luci-lib-ipkg \
-    ipset iptables iptables-legacy iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat \
-    coreutils coreutils-base64 coreutils-nohup ip-full libuci-lua microsocks resolveip"
+    ipset ipt2socks iptables iptables-legacy iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat \
+    coreutils coreutils-base64 coreutils-nohup dns2socks ip-full libuci-lua microsocks resolveip tcping"
     
-    # Openclah
-    PACKAGES="$PACKAGES coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base luci-app-openclash"
-    
-    # NAS and Hard disk tools
-    PACKAGES="$PACKAGES luci-app-diskman kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
-    
-    # Bandwidth And Network Monitoring
-    PACKAGES+="$PACKAGES internet-detector luci-app-internet-detector internet-detector-mod-modem-restart vnstat2 vnstati2 luci-app-vnstat2"
-    
-    # Speedtest
-    PACKAGES="$PACKAGES iperf3"
+    # Openclash
+    PACKAGES="$PACKAGES coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base"
     
     # Material Theme
     PACKAGES="$PACKAGES luci-theme-material"
@@ -58,14 +49,9 @@ PACKAGES=""
     php8-cli php8-mod-bcmath php8-mod-calendar php8-mod-filter php8-mod-gd php8-mod-intl \
     php8-mod-mysqli php8-mod-mysqlnd php8-mod-opcache php8-mod-pdo php8-mod-pdo-mysql php8-mod-phar \
     php8-mod-xml php8-mod-xmlreader php8-mod-xmlwriter"
-      
-    # misc
-    PACKAGES="$PACKAGES luci-app-ramfree luci-app-temp-status wget"
-    
-    PACKAGES="$PACKAGES i2c-tools kmod-i2c-core kmod-i2c-gpio"
     
     # No
-    PACKAGES="$PACKAGES -procd-ujail -libgd -dnsmasq -automount -libustream-openssl -default-settings-chn -luci-i18n-base-zh-cn -kmod-usb-net-rtl8152-vendor -hostapd -hostapd-common -hostapd-utils"
+    PACKAGES="$PACKAGES -procd-ujail -libgd -dnsmasq"
     
     # amlogic
     PACKAGES="$PACKAGES luci-app-amlogic ath9k-htc-firmware btrfs-progs hostapd hostapd-utils kmod-ath kmod-ath9k kmod-ath9k-common kmod-ath9k-htc kmod-cfg80211 kmod-crypto-acompress kmod-crypto-crc32c kmod kmod-fs-btrfs kmod-mac80211 wireless-tools wpa-cli wpa-supplicant"
