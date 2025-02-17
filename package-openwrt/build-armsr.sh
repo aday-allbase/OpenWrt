@@ -23,7 +23,7 @@ PACKAGES=""
     kmod-usb-net-ipheth kmod-usb-net-cdc-mbim usbmuxd libusbmuxd-utils libimobiledevice-utils \
     mbim-utils qmi-utils uqmi umbim modemmanager modemmanager-rpcd luci-proto-modemmanager libmbim libqmi luci-proto-3g luci-proto-ncm \
     usb-modeswitch picocom minicom libusb-1.0-0 \
-    xmm-modem kmod-usb-net-asix kmod-usb-net-asix-ax88179 kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 \
+    kmod-usb-net-asix kmod-usb-net-asix-ax88179 kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 \
     ca-bundle ca-certificates luci-compat coreutils-sleep fontconfig coreutils-whoami file lolcat \
     zsh kmod-mii kmod-usb-wdm kmod-usb-serial-wwan kmod-usb-ehci kmod-phy-broadcom kmod-phylib-broadcom kmod-tg3 iptables-nft coreutils-stty \
     hostapd wpa-cli wpa-supplicant kmod-cfg80211 kmod-mac80211 wireless-tools iw-full hostapd-utils \
@@ -34,7 +34,7 @@ PACKAGES=""
     ruby ruby-bigdecimal ruby-date ruby-digest ruby-enc ruby-forwardable ruby-pstore ruby-psych ruby-stringio ruby-yaml \
     luci-lua-runtime zoneinfo-asia zoneinfo-core luci-proto-mbim \
     libc coreutils-stat libopenssl-legacy \
-    sms-tool luci-app-temp-status cpusage ttyd dmesg kmod-tun luci-lib-ipkg \
+    sms-tool cpusage ttyd dmesg kmod-tun luci-lib-ipkg \
     ipset ipt2socks iptables iptables-legacy iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat \
     coreutils coreutils-base64 coreutils-nohup dns2socks ip-full libuci-lua microsocks resolveip tcping"
     
