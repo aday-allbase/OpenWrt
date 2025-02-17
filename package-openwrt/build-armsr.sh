@@ -35,8 +35,8 @@ PACKAGES=""
     luci-lua-runtime zoneinfo-asia zoneinfo-core luci-proto-mbim \
     libc coreutils-stat libopenssl-legacy \
     sms-tool cpusage ttyd dmesg kmod-tun luci-lib-ipkg \
-    ipset ipt2socks iptables iptables-legacy iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat \
-    coreutils coreutils-base64 coreutils-nohup dns2socks ip-full libuci-lua microsocks resolveip tcping"
+    ipset iptables iptables-legacy iptables-mod-iprange iptables-mod-socket iptables-mod-tproxy kmod-ipt-nat \
+    coreutils coreutils-base64 coreutils-nohup ip-full libuci-lua microsocks resolveip"
     
     # Openclash
     PACKAGES="$PACKAGES coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base"
@@ -54,7 +54,7 @@ PACKAGES=""
     PACKAGES="$PACKAGES -procd-ujail -libgd -dnsmasq"
     
     # amlogic
-    PACKAGES="$PACKAGES luci-app-amlogic ath9k-htc-firmware btrfs-progs hostapd hostapd-utils kmod-ath kmod-ath9k kmod-ath9k-common kmod-ath9k-htc kmod-cfg80211 kmod-crypto-acompress kmod-crypto-crc32c kmod kmod-fs-btrfs kmod-mac80211 wireless-tools wpa-cli wpa-supplicant"
+    PACKAGES="$PACKAGES ath9k-htc-firmware btrfs-progs hostapd hostapd-utils kmod-ath kmod-ath9k kmod-ath9k-common kmod-ath9k-htc kmod-cfg80211 kmod-crypto-acompress kmod-crypto-crc32c kmod kmod-fs-btrfs kmod-mac80211 wireless-tools wpa-cli wpa-supplicant"
     
 # Files directory for custom configurations or files
 FILES="files"
