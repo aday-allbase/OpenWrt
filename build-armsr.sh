@@ -12,7 +12,7 @@ PACKAGES=""
 PACKAGES+=" -dnsmasq dnsmasq-full cgi-io libiwinfo libiwinfo-data libiwinfo-lua liblua \
 luci-lib-base luci-lib-ip luci-lib-jsonc luci-lib-nixio luci-mod-admin-full \
 cpusage ttyd dmesg luci-lib-ipkg git git-http \
-zram-swap adb parted losetup resize2fs luci-ssl block-mount htop wget-ssl \
+zram-swap adb parted losetup resize2fs luci-ssl htop wget-ssl \
 tar unrar gzip jq luci-app-ttyd nano httping screen openssh-sftp-server \
 liblucihttp liblucihttp-lua libubus-lua lua luci-app-firewall luci-app-opkg \
 ca-bundle coreutils-sleep fontconfig coreutils-whoami file lolcat \
@@ -37,10 +37,9 @@ kmod-phy-broadcom kmod-phylib-broadcom kmod-tg3 libusb-1.0-0"
 
 # Tunnel option
 PACKAGES+="coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base luci-app-openclash"
-PACKAGES+="nikki luci-app-openclashnikki luci-app-nikki"
 
 # NAS and Hard disk tools
-PACKAGES+=" luci-app-diskman kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
+PACKAGES+=" kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
 
 # Bandwidth And Network Monitoring
 PACKAGES+=" internet-detector luci-app-internet-detector internet-detector-mod-modem-restart vnstat2 vnstati2 luci-app-vnstat2 netdata"
@@ -54,7 +53,7 @@ PACKAGES+=" php8 php8-fastcgi php8-fpm php8-mod-session php8-mod-ctype php8-mod-
 # More
 PACKAGES+=" luci-app-temp-status"
 
-PACKAGES+=" luci-app-amlogic ath9k-htc-firmware btrfs-progs hostapd hostapd-utils kmod-ath kmod-ath9k kmod-ath9k-common kmod-ath9k-htc kmod-cfg80211 kmod-crypto-acompress kmod-crypto-crc32c kmod-crypto-hash kmod-fs-btrfs kmod-mac80211 wireless-tools wpa-cli wpa-supplicant -procd-ujail"
+PACKAGES+=" ath9k-htc-firmware btrfs-progs hostapd hostapd-utils kmod-ath kmod-ath9k kmod-ath9k-common kmod-ath9k-htc kmod-cfg80211 kmod-crypto-acompress kmod-crypto-crc32c kmod-crypto-hash kmod-fs-btrfs kmod-mac80211 wireless-tools wpa-cli wpa-supplicant -procd-ujail"
 
 # Custom Files
 FILES="files"
