@@ -37,7 +37,7 @@ kmod-phy-broadcom kmod-phylib-broadcom kmod-tg3 libusb-1.0-0"
 
 # Tunnel option
 PACKAGES+="coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base luci-app-openclash"
-PACKAGES+="nikki luci-app-nikki"
+PACKAGES+="nikki luci-app-openclashnikki luci-app-nikki"
 
 # NAS and Hard disk tools
 PACKAGES+=" luci-app-diskman kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
