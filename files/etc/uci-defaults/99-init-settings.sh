@@ -74,10 +74,6 @@ sed -i -e '/413c:81d7/,+5d' /etc/usb-mode.json
 # Remove Thales MV31-W T99W175 usb-modeswitch
 sed -i -e '/1e2d:00b3/,+5d' /etc/usb-mode.json
 
-# Disable /etc/config/xmm-modem
-uci set xmm-modem.@xmm-modem[0].enable='0'
-uci commit
-
 # setup auto vnstat database backup
 sed -i 's/;DatabaseDir "\/var\/lib\/vnstat"/DatabaseDir "\/etc\/vnstat"/' /etc/vnstat.conf
 mkdir -p /etc/vnstat
@@ -118,17 +114,6 @@ else
   service internet-detector restart
   rm -rf /etc/config/openclash1
   rm -rf /etc/openclash
-fi
-
-# configurating Nikki
-if opkg list-installed | grep luci-app-nikki > /dev/null; then
-  echo "setup complete!"
-  chmod +x /etc/nikki/run/GeoIP.dat
-  chmod +x /etc/nikki/run/GeoSite.dat
-else
-  echo "No Nikki Detected."
-  rm -rf /etc/config/nikki
-  rm -rf /etc/nikki
 fi
 
 # Setup PHP
