@@ -10,7 +10,7 @@ PROFILE="generic"
 PACKAGES="-procd-ujail -dnsmasq dnsmasq-full cgi-io libiwinfo libiwinfo-data libiwinfo-lua liblua \
 luci-lib-base luci-lib-ip luci-lib-jsonc luci-lib-nixio luci-mod-admin-full \
 cpusage ttyd dmesg luci-lib-ipkg git git-http \
-zram-swap adb parted losetup resize2fs luci-ssl block-mount htop wget-ssl \
+zram-swap adb parted losetup resize2fs luci-ssl htop wget-ssl \
 tar unrar gzip jq luci-app-ttyd nano httping screen openssh-sftp-server \
 liblucihttp liblucihttp-lua libubus-lua lua luci-app-firewall luci-app-opkg \
 ca-bundle coreutils-sleep fontconfig coreutils-whoami file lolcat \
@@ -31,7 +31,7 @@ modemmanager  modemmanager-rpcd luci-proto-modemmanager libmbim libqmi usbutils 
 kmod-usb-net-huawei-cdc-ncm kmod-usb-net-cdc-ether kmod-usb-net-rndis kmod-usb-net-sierrawireless kmod-usb-ohci kmod-usb-serial-sierrawireless \
 kmod-usb-uhci kmod-usb2 kmod-usb-ehci kmod-usb-net-ipheth usbmuxd libusbmuxd-utils libimobiledevice-utils usb-modeswitch kmod-nls-utf8 mbim-utils xmm-modem \
 kmod-phy-broadcom kmod-phylib-broadcom kmod-tg3 libusb-1.0-0 kmod-usb3 kmod-r8169 kmod-lan743x \
-luci-app-diskman luci-app-disks-info smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g \
+smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g \
 php8 php8-fastcgi php8-fpm php8-mod-session php8-mod-ctype php8-mod-fileinfo php8-mod-zip php8-mod-iconv php8-mod-mbstring"
 
 # Files directory for custom configurations or files
