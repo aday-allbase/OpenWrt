@@ -45,7 +45,7 @@ log "Configuring network interfaces..."
 # LAN configuration
 uci set network.lan.ipaddr="192.168.1.1"
 uci set network.lan.netmask="255.255.255.0"
-uci set network.lan.dns="8.8.8.8,1.1.1.1"
+#uci set network.lan.dns="8.8.8.8,1.1.1.1"
 
 # WAN configuration
 uci set network.wan=interface 
@@ -111,14 +111,6 @@ sed -i 's/;DatabaseDir "\/var\/lib\/vnstat"/DatabaseDir "\/etc\/vnstat"/' /etc/v
 mkdir -p /etc/vnstat
 chmod +x /etc/init.d/vnstat_backup
 /etc/init.d/vnstat_backup enable
-if [ -f "/www/vnstati/vnstati.sh" ]; then
-  chmod +x /www/vnstati/vnstati.sh
-  /www/vnstati/vnstati.sh
-fi
-
-# Adjust app categories in LuCI
-log "Adjusting application categories..."
-sed -i 's/services/modem/g' /usr/share/luci/menu.d/luci-app-lite-watchdog.json
 
 # Shell environment and profile setup
 log "Setting up shell environment..."
