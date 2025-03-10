@@ -5,18 +5,18 @@ on:
   workflow_dispatch:
     inputs:
       release: 
-        description: 将编译出的镜像上传到 Release
+        description: Release
         required: false
         default: 'true'
       upload-all:
-        description: 将编译出的所有镜像都上传到 Artifacts
+        description: Artifacts
         required: false
         default: 'false'
 
 env:
   DOWNLOAD_BASE: https://downloads.openwrt.org
   VENDOR: openwrt
-  VERSION: 23.05.5
+  VERSION: 24.10.0
 
 jobs:
   Generate:
@@ -34,7 +34,7 @@ jobs:
           echo "DATETIME=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with: 
           path: origin
 
@@ -57,14 +57,14 @@ jobs:
 
       - name: Upload VDI Image For Development Purpose
         if: github.ref == 'refs/heads/dev'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.VENDOR }}-${{ env.VERSION }}-amlogic-vdi-image-${{ env.DATETIME }}
           path: ${{ env.VENDOR }}-imagebuilder-${{ env.VERSION }}-armsr-armv8.Linux-x86_64/bin/targets/armsr/armv8/*.vdi
 
       - name: Upload All Firmware to Artifacts
         if: github.event.inputs.upload-all == 'true'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.VENDOR }}-${{ env.VERSION }}-amlogic-images-${{ env.DATETIME }}
           path: ${{ env.VENDOR }}-imagebuilder-${{ env.VERSION }}-armsr-armv8.Linux-x86_64/bin/targets/armsr/armv8/*
