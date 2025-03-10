@@ -105,9 +105,29 @@ log "Disabling XMM modem service..."
 uci set xmm-modem.@xmm-modem[0].enable='0'
 uci commit xmm-modem
 
+# Configure vnstat for traffic statistics
+log "Setting up vnstat..."
+sed -i 's/;DatabaseDir "\/var\/lib\/vnstat"/DatabaseDir "\/etc\/vnstat"/' /etc/vnstat.conf
+mkdir -p /etc/vnstat
+chmod +x /etc/init.d/vnstat_backup
+/etc/init.d/vnstat_backup enable
+if [ -f "/www/vnstati/vnstati.sh" ]; then
+  chmod +x /www/vnstati/vnstati.sh
+  /www/vnstati/vnstati.sh
+fi
+
+# Adjust app categories in LuCI
+log "Adjusting application categories..."
+sed -i 's/services/modem/g' /usr/share/luci/menu.d/luci-app-lite-watchdog.json
+
+# Shell environment and profile setup
+log "Setting up shell environment..."
+sed -i 's/\[ -f \/etc\/banner \] && cat \/etc\/banner/#&/' /etc/profile
+sed -i 's/\[ -n "$FAILSAFE" \] && cat \/etc\/banner.failsafe/#&/' /etc/profile
+
 # Setup utility scripts
 log "Setting up utility scripts..."
-for script in /sbin/free.sh; do
+for script in /sbin/free.sh /usr/bin/openclash.sh; do
   if [ -f "$script" ]; then
     chmod +x "$script"
     log "Made $script executable"
@@ -118,6 +138,51 @@ chmod +x /usr/bin/aturttl
 chmod +x /usr/bin/expand_rootfs
 chmod +x /usr/bin/patchoc.sh
 chmod +x /usr/bin/speedtest
+
+# Configure OpenClash if installed
+log "Checking and configuring OpenClash..."
+if opkg list-installed | grep -q luci-app-openclash; then
+  log "OpenClash detected, configuring..."
+  # Create directory structure if it doesn't exist
+  mkdir -p /etc/openclash/core
+  mkdir -p /etc/openclash/history
+  
+  # Set permissions for core files
+  for file in /etc/openclash/core/clash_meta /etc/openclash/GeoIP.dat /etc/openclash/GeoSite.dat /etc/openclash/Country.mmdb; do
+    if [ -f "$file" ]; then
+      chmod +x "$file"
+      log "Set permissions for $file"
+    fi
+  done
+  
+  # Apply patches
+  if [ -f "/usr/bin/patchoc.sh" ]; then
+    chmod +x /usr/bin/patchoc.sh
+    log "Patching OpenClash overview..."
+    /usr/bin/patchoc.sh
+    sed -i '/exit 0/i # OpenClash patch' /etc/rc.local
+    sed -i '/exit 0/i #/usr/bin/patchoc.sh' /etc/rc.local
+  fi
+  
+  # Create symbolic links
+  ln -sf /etc/openclash/history/config-wrt.db /etc/openclash/cache.db 2>/dev/null
+  ln -sf /etc/openclash/core/clash_meta /etc/openclash/clash 2>/dev/null
+  
+  # Move configuration file
+  if [ -f "/etc/config/openclash1" ]; then
+    rm -rf /etc/config/openclash
+    mv /etc/config/openclash1 /etc/config/openclash
+    log "Moved OpenClash configuration file"
+  fi
+  
+  log "OpenClash setup complete!"
+else
+  log "OpenClash not detected, cleaning up..."
+  uci delete internet-detector.Openclash 2>/dev/null
+  uci commit internet-detector 2>/dev/null
+  service internet-detector restart
+  rm -rf /etc/config/openclash1
+fi
 
 # Setup PHP for web applications
 log "Setting up PHP..."
@@ -146,6 +211,13 @@ ln -sf /usr/bin/php-cli /usr/bin/php
 log "Setting up TinyFM file manager..."
 mkdir -p /www/tinyfm
 ln -sf / /www/tinyfm/rootfs
+
+# Set up system information script
+if [ -f "/etc/profile.d/30-sysinfo.sh-bak" ]; then
+  rm -rf /etc/profile.d/30-sysinfo.sh 2>/dev/null
+  mv /etc/profile.d/30-sysinfo.sh-bak /etc/profile.d/30-sysinfo.sh
+  log "Restored original system information script"
+fi
 
 # Complete setup
 log "==================== CONFIGURATION COMPLETE ===================="
